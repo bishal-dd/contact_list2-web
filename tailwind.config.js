@@ -5,4 +5,5 @@ export default {
     extend: {},
   },
   plugins: [],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}"],
 };
