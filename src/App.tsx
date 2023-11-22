@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactList from "./pages/ContactList";
 import Navbar from "./components/organisms/header/Navbar";

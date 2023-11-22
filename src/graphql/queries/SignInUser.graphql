@@ -1,0 +1,3 @@
+query SignInUser($email: String, $password: String) {
+  signInUser(email: $email, password: $password)
+}

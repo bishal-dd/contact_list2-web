@@ -1,0 +1,9 @@
+query GetAllContact($userId: Int!) {
+  getAllContact(userId: $userId) {
+    contact_name
+    contact_email
+    contact_number
+    userId
+    id
+  }
+}
