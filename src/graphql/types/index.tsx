@@ -23,6 +23,7 @@ export type Contact = {
   contact_name?: Maybe<Scalars['String']['output']>;
   contact_number?: Maybe<Scalars['Int']['output']>;
   id?: Maybe<Scalars['ID']['output']>;
+  isActive?: Maybe<Scalars['Boolean']['output']>;
   userId?: Maybe<Scalars['Int']['output']>;
 };
 
@@ -83,18 +84,24 @@ export type RootQueryTypeSignInUserArgs = {
 export type User = {
   __typename?: 'User';
   email?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   password?: Maybe<Scalars['String']['output']>;
   user_name?: Maybe<Scalars['String']['output']>;
 };
 
-export type SignUpMutationVariables = Exact<{
-  user_name: Scalars['String']['input'];
-  email: Scalars['String']['input'];
-  password: Scalars['String']['input'];
+export type ContactFragmentFragment = { __typename?: 'Contact', id?: string | null, contact_name?: string | null, contact_number?: number | null, contact_email?: string | null, userId?: number | null, isActive?: boolean | null };
+
+export type UserFragmentFragment = { __typename?: 'User', id?: string | null, user_name?: string | null, email?: string | null, password?: string | null };
+
+export type CreateContactMutationVariables = Exact<{
+  contact_name: Scalars['String']['input'];
+  contact_email: Scalars['String']['input'];
+  contact_number: Scalars['Int']['input'];
+  userId: Scalars['Int']['input'];
 }>;
 
 
-export type SignUpMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'User', user_name?: string | null } | null };
+export type CreateContactMutation = { __typename?: 'Mutation', createContact?: { __typename?: 'Contact', id?: string | null, contact_name?: string | null, contact_number?: number | null, contact_email?: string | null, userId?: number | null, isActive?: boolean | null } | null };
 
 export type DeleteContactMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -111,14 +118,23 @@ export type UpdateContactMutationVariables = Exact<{
 }>;
 
 
-export type UpdateContactMutation = { __typename?: 'Mutation', updateContact?: { __typename?: 'Contact', contact_name?: string | null, contact_email?: string | null, contact_number?: number | null, id?: string | null } | null };
+export type UpdateContactMutation = { __typename?: 'Mutation', updateContact?: { __typename?: 'Contact', id?: string | null, contact_name?: string | null, contact_number?: number | null, contact_email?: string | null, userId?: number | null, isActive?: boolean | null } | null };
+
+export type SignUpMutationVariables = Exact<{
+  user_name: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+}>;
+
+
+export type SignUpMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'User', id?: string | null, user_name?: string | null, email?: string | null, password?: string | null } | null };
 
 export type GetAllContactQueryVariables = Exact<{
   userId: Scalars['Int']['input'];
 }>;
 
 
-export type GetAllContactQuery = { __typename?: 'RootQueryType', getAllContact?: Array<{ __typename?: 'Contact', contact_name?: string | null, contact_email?: string | null, contact_number?: number | null, userId?: number | null, id?: string | null } | null> | null };
+export type GetAllContactQuery = { __typename?: 'RootQueryType', getAllContact?: Array<{ __typename?: 'Contact', id?: string | null, contact_name?: string | null, contact_number?: number | null, contact_email?: string | null, userId?: number | null, isActive?: boolean | null } | null> | null };
 
 export type SignInUserQueryVariables = Exact<{
   email?: InputMaybe<Scalars['String']['input']>;
@@ -128,42 +144,65 @@ export type SignInUserQueryVariables = Exact<{
 
 export type SignInUserQuery = { __typename?: 'RootQueryType', signInUser?: string | null };
 
-
-export const SignUpDocument = gql`
-    mutation SignUp($user_name: String!, $email: String!, $password: String!) {
-  createUser(user_name: $user_name, email: $email, password: $password) {
-    user_name
-  }
+export const ContactFragmentFragmentDoc = gql`
+    fragment ContactFragment on Contact {
+  id
+  contact_name
+  contact_number
+  contact_email
+  userId
+  isActive
 }
     `;
-export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMutationVariables>;
+export const UserFragmentFragmentDoc = gql`
+    fragment UserFragment on User {
+  id
+  user_name
+  email
+  password
+}
+    `;
+export const CreateContactDocument = gql`
+    mutation CreateContact($contact_name: String!, $contact_email: String!, $contact_number: Int!, $userId: Int!) {
+  createContact(
+    contact_name: $contact_name
+    contact_email: $contact_email
+    contact_number: $contact_number
+    userId: $userId
+  ) {
+    ...ContactFragment
+  }
+}
+    ${ContactFragmentFragmentDoc}`;
+export type CreateContactMutationFn = Apollo.MutationFunction<CreateContactMutation, CreateContactMutationVariables>;
 
 /**
- * __useSignUpMutation__
+ * __useCreateContactMutation__
  *
- * To run a mutation, you first call `useSignUpMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSignUpMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useCreateContactMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateContactMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [signUpMutation, { data, loading, error }] = useSignUpMutation({
+ * const [createContactMutation, { data, loading, error }] = useCreateContactMutation({
  *   variables: {
- *      user_name: // value for 'user_name'
- *      email: // value for 'email'
- *      password: // value for 'password'
+ *      contact_name: // value for 'contact_name'
+ *      contact_email: // value for 'contact_email'
+ *      contact_number: // value for 'contact_number'
+ *      userId: // value for 'userId'
  *   },
  * });
  */
-export function useSignUpMutation(baseOptions?: Apollo.MutationHookOptions<SignUpMutation, SignUpMutationVariables>) {
+export function useCreateContactMutation(baseOptions?: Apollo.MutationHookOptions<CreateContactMutation, CreateContactMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, options);
+        return Apollo.useMutation<CreateContactMutation, CreateContactMutationVariables>(CreateContactDocument, options);
       }
-export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
-export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
-export type SignUpMutationOptions = Apollo.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
+export type CreateContactMutationHookResult = ReturnType<typeof useCreateContactMutation>;
+export type CreateContactMutationResult = Apollo.MutationResult<CreateContactMutation>;
+export type CreateContactMutationOptions = Apollo.BaseMutationOptions<CreateContactMutation, CreateContactMutationVariables>;
 export const DeleteContactDocument = gql`
     mutation DeleteContact($id: ID!) {
   deleteContact(id: $id) {
@@ -205,13 +244,10 @@ export const UpdateContactDocument = gql`
     contact_email: $contact_email
     contact_number: $contact_number
   ) {
-    contact_name
-    contact_email
-    contact_number
-    id
+    ...ContactFragment
   }
 }
-    `;
+    ${ContactFragmentFragmentDoc}`;
 export type UpdateContactMutationFn = Apollo.MutationFunction<UpdateContactMutation, UpdateContactMutationVariables>;
 
 /**
@@ -241,17 +277,48 @@ export function useUpdateContactMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateContactMutationHookResult = ReturnType<typeof useUpdateContactMutation>;
 export type UpdateContactMutationResult = Apollo.MutationResult<UpdateContactMutation>;
 export type UpdateContactMutationOptions = Apollo.BaseMutationOptions<UpdateContactMutation, UpdateContactMutationVariables>;
+export const SignUpDocument = gql`
+    mutation SignUp($user_name: String!, $email: String!, $password: String!) {
+  createUser(user_name: $user_name, email: $email, password: $password) {
+    ...UserFragment
+  }
+}
+    ${UserFragmentFragmentDoc}`;
+export type SignUpMutationFn = Apollo.MutationFunction<SignUpMutation, SignUpMutationVariables>;
+
+/**
+ * __useSignUpMutation__
+ *
+ * To run a mutation, you first call `useSignUpMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSignUpMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [signUpMutation, { data, loading, error }] = useSignUpMutation({
+ *   variables: {
+ *      user_name: // value for 'user_name'
+ *      email: // value for 'email'
+ *      password: // value for 'password'
+ *   },
+ * });
+ */
+export function useSignUpMutation(baseOptions?: Apollo.MutationHookOptions<SignUpMutation, SignUpMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SignUpMutation, SignUpMutationVariables>(SignUpDocument, options);
+      }
+export type SignUpMutationHookResult = ReturnType<typeof useSignUpMutation>;
+export type SignUpMutationResult = Apollo.MutationResult<SignUpMutation>;
+export type SignUpMutationOptions = Apollo.BaseMutationOptions<SignUpMutation, SignUpMutationVariables>;
 export const GetAllContactDocument = gql`
     query GetAllContact($userId: Int!) {
   getAllContact(userId: $userId) {
-    contact_name
-    contact_email
-    contact_number
-    userId
-    id
+    ...ContactFragment
   }
 }
-    `;
+    ${ContactFragmentFragmentDoc}`;
 
 /**
  * __useGetAllContactQuery__

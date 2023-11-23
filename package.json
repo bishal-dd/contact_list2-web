@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
@@ -18,7 +19,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "react-router-dom": "^6.19.0"
+    "react-router-dom": "^6.19.0",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.0",

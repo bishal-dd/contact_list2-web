@@ -1,5 +1,5 @@
 mutation SignUp($user_name: String!, $email: String!, $password: String!) {
   createUser(user_name: $user_name, email: $email, password: $password) {
-    user_name
+    ...UserFragment
   }
 }

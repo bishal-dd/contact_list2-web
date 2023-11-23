@@ -1,0 +1,8 @@
+fragment ContactFragment on Contact {
+  id
+  contact_name
+  contact_number
+  contact_email
+  userId
+  isActive
+}

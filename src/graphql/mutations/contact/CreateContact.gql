@@ -1,0 +1,15 @@
+mutation CreateContact(
+  $contact_name: String!
+  $contact_email: String!
+  $contact_number: Int!
+  $userId: Int!
+) {
+  createContact(
+    contact_name: $contact_name
+    contact_email: $contact_email
+    contact_number: $contact_number
+    userId: $userId
+  ) {
+    ...ContactFragment
+  }
+}

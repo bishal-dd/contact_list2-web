@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import TextBox from "../../atoms/text-boxes/TextBox";
 import CRUDButtons from "../../atoms/buttons/CRUD-buttons/CRUDButtons";
 import Label from "../../atoms/labels/Label";
+import { useUser } from "../../../store/entities/user/hooks/useUser";
 
 interface Props {
   label: string;
@@ -13,7 +14,7 @@ const AuthForm: React.FC<Props> = ({ label, signup }) => {
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white w-96 p-6 rounded-lg shadow-lg border  border-gray-300">
         <h2 className="text-2xl font-bold mb-4">{label}</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           {signup ? (
             <div className="mb-4">
               <Label label="Name" id="name" />

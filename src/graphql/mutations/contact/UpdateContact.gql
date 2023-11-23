@@ -10,9 +10,6 @@ mutation UpdateContact(
     contact_email: $contact_email
     contact_number: $contact_number
   ) {
-    contact_name
-    contact_email
-    contact_number
-    id
+    ...ContactFragment
   }
 }
