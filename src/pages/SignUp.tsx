@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/organisms/header/Navbar";
-import AuthForm from "../components/molecules/forms/AuthForm";
+import AuthForm from "../components/organisms/forms/AuthForm";
 
 const SignUp: React.FC = () => {
   return (

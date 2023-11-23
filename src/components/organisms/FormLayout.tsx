@@ -1,5 +1,5 @@
 import React from "react";
-import CUForm from "../molecules/forms/CUForm";
+import CUForm from "./forms/CUForm";
 
 interface Props {
   label: string;
