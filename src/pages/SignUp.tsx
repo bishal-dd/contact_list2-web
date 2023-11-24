@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "../components/organisms/header/Navbar";
-import AuthForm from "../components/organisms/forms/AuthForm";
+import AuthFormLayout from "../components/organisms/AuthFormLayout";
 
 const SignUp: React.FC = () => {
   return (
@@ -10,7 +10,7 @@ const SignUp: React.FC = () => {
         text_color="text-white"
         isLoggedin={false}
       />
-      <AuthForm label="Sign Up" signup={true} />
+      <AuthFormLayout label="Sign Up" signup={true} />
     </>
   );
 };

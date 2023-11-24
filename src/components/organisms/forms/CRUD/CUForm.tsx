@@ -1,7 +1,7 @@
 import React from "react";
-import Label from "../../atoms/labels/Label";
-import TextBox from "../../atoms/text-boxes/TextBox";
-import CRUDButtons from "../../atoms/buttons/CRUD-buttons/CRUDButtons";
+import Label from "../../../atoms/labels/Label";
+import TextBox from "../../../atoms/text-boxes/TextBox";
+import CRUDButtons from "../../../atoms/buttons/CRUD-buttons/CRUDButtons";
 
 interface Props {
   label: string;

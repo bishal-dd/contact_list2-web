@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import CUForm from "../../components/organisms/forms/CUForm";
+import CUForm from "../../components/organisms/forms/CRUD/CUForm";
 
 const meta: Meta<typeof CUForm> = {
   component: CUForm,

@@ -1,6 +1,6 @@
 import React from "react";
 import CrossButton from "../../atoms/buttons/CrossButton";
-import CUForm from "../forms/CUForm";
+import CUForm from "../forms/CRUD/CUForm";
 
 const CreateModal: React.FC = () => {
   return (

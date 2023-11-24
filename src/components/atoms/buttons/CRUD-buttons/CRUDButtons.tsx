@@ -24,6 +24,7 @@ const CRUDButtons: React.FC<Props> = ({
   return (
     <button
       className={`${text_color} py-2 px-4 rounded-md flex items-center ${background}`}
+      type="submit"
     >
       <span className="mr-2">{selectedIcon}</span>
       <span>{label}</span>

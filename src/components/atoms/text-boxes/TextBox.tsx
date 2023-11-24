@@ -11,7 +11,6 @@ const TextBox: React.FC<Props> = ({ name }) => {
       id={name}
       name={name}
       className="w-full p-2 border border-gray-300 rounded-md"
-      required
     />
   );
 };
