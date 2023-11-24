@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   text_color: string;
@@ -8,9 +9,9 @@ interface Props {
 
 const AuthButton: React.FC<Props> = ({ text_color, link, label }) => {
   return (
-    <a href={link} className={`${text_color}`}>
+    <Link to={link} className={`${text_color}`}>
       {label}
-    </a>
+    </Link>
   );
 };
 

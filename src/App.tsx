@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ContactList from "./pages/ContactList";
 import Navbar from "./components/organisms/header/Navbar";
 import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 
 const App: React.FC = () => {
   return (
@@ -14,7 +15,8 @@ const App: React.FC = () => {
         />
         <Routes>
           <Route path="/contact" element={<ContactList />} />
-          <Route path="/" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<SignIn />} />
         </Routes>
       </BrowserRouter>
     </>

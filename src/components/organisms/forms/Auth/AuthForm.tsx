@@ -15,9 +15,8 @@ const AuthForm: React.FC<Props> = ({ label, signup, handelSubmit }) => {
   return (
     <Formik
       initialValues={initialValues}
-      // validationSchema={AuthSchema}
+      validationSchema={AuthSchema}
       onSubmit={(values) => {
-        console.log(values);
         handelSubmit({ ...values });
       }}
     >
@@ -25,16 +24,16 @@ const AuthForm: React.FC<Props> = ({ label, signup, handelSubmit }) => {
         {signup ? (
           <div className="mb-4">
             <Label label="Name" id="user_name" />
-            <TextBox name="user_name" />
+            <TextBox name="user_name" type="text" />
           </div>
         ) : null}
         <div className="mb-4">
           <Label label="Email" id="email" />
-          <TextBox name="email" />
+          <TextBox name="email" type="email" />
         </div>
         <div className="mb-4">
           <Label label="Password" id="password" />
-          <TextBox name="password" />
+          <TextBox name="password" type="password" />
         </div>
         <CRUDButtons
           icon=""

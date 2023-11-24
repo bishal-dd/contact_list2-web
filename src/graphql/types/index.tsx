@@ -46,6 +46,7 @@ export type MutationCreateContactArgs = {
 
 export type MutationCreateUserArgs = {
   email?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['ID']['input']>;
   password?: InputMaybe<Scalars['String']['input']>;
   user_name?: InputMaybe<Scalars['String']['input']>;
 };

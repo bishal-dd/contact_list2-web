@@ -25,8 +25,12 @@ const Navbar: React.FC<Props> = ({ background, text_color, isLoggedin }) => {
               </>
             ) : (
               <>
-                <AuthButton text_color={text_color} link="#" label="Login" />
-                <AuthButton text_color={text_color} link="#" label="Signup" />
+                <AuthButton text_color={text_color} link="/" label="Login" />
+                <AuthButton
+                  text_color={text_color}
+                  link="/signup"
+                  label="Signup"
+                />
               </>
             )}
           </div>

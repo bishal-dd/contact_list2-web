@@ -11,6 +11,7 @@ interface Props {
 const AuthFormLayout: React.FC<Props> = ({ label, signup }) => {
   const { createUser } = useUser();
   const handleAddUser = useCallback((user: UserType) => {
+    console.log(user);
     createUser({ user: user });
   }, []);
   return (
