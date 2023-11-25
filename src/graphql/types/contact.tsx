@@ -6,4 +6,5 @@ export type {
   DeleteContactMutation,
   UpdateContactMutation,
   GetAllContactQuery,
+  CreateContactMutationVariables,
 } from ".";

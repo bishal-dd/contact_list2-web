@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 import { SignUpMutationVariables } from "../../../../store/entities/user/type";
+import { User } from "../../../../store/entities/user/type";
 
 export const AuthSchema = Yup.object().shape({
-  user_name: Yup.string().required("Name is required"),
   email: Yup.string()
     .email("Please add valid email")
     .required("Email is required"),
@@ -10,6 +10,7 @@ export const AuthSchema = Yup.object().shape({
 });
 
 export type UserType = SignUpMutationVariables;
+export type Users = Omit<User, "user_name">;
 
 export const initialValues: UserType = {
   user_name: "",

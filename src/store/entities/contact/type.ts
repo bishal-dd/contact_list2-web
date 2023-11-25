@@ -6,6 +6,7 @@ export type {
   UpdateContactMutation,
   GetAllContactQuery,
   ContactResponse,
+  CreateContactMutationVariables,
 } from "../../../graphql/types/contact";
 
 export type Contact = ContactResponse;

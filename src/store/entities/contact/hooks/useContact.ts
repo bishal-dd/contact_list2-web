@@ -2,12 +2,18 @@ import { useRecoilCallback } from "recoil";
 import { useUpsert } from "./useUpsert";
 import { contactState } from "../atom";
 import { Contact } from "../type";
-import { useUpdateContactMutation } from "../../../../graphql/types";
+import {
+  useUpdateContactMutation,
+  useCreateContactMutation,
+} from "../../../../graphql/types";
+
+import { CreateContactMutationVariables } from "../type";
 
 export const useContact = (contactId: string) => {
   const { upsert } = useUpsert();
 
-  const [UpdateContactMutation] = useUpdateContactMutation();
+  const [updateContactMutation] = useUpdateContactMutation();
+  const [createContactMutation] = useCreateContactMutation();
 
   const setContact = useRecoilCallback(
     ({ snapshot }) =>
@@ -15,7 +21,7 @@ export const useContact = (contactId: string) => {
         const prev = await snapshot.getPromise(contactState(contactId));
         upsert({ ...prev, ...input });
 
-        const res = await UpdateContactMutation({
+        const res = await updateContactMutation({
           variables: {
             id: contactId,
             ...input,
@@ -25,7 +31,7 @@ export const useContact = (contactId: string) => {
           upsert(prev);
         }
       },
-    [upsert, UpdateContactMutation, contactId]
+    [upsert, updateContactMutation, contactId]
   );
 
   return {

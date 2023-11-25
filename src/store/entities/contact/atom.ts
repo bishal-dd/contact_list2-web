@@ -9,7 +9,7 @@ export const initialState = (): Contact => ({
   contact_name: "",
   contact_number: 0,
   contact_email: "",
-  userId: 0,
+  userId: "",
   isActive: null,
 });
 

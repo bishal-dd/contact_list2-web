@@ -5,4 +5,5 @@ export type {
   SignUpMutation,
   SignInUserQuery,
   SignUpMutationVariables,
+  SignInUserQueryVariables,
 } from ".";
