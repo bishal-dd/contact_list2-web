@@ -1,5 +1,5 @@
 import type {
-  SignUpMutationVariables,
+  SignInUserQueryVariables,
   UserResponse,
 } from "../../../graphql/types/user";
 
@@ -11,4 +11,8 @@ export type {
 } from "../../../graphql/types/user";
 
 export type User = UserResponse;
-export type UserSignInType = Omit<SignUpMutationVariables, "user_name">;
+export type UserSignInType = SignInUserQueryVariables;
+export type CurrentUser = Omit<User, "password"> & {
+  userId: string;
+  iat?: number;
+};

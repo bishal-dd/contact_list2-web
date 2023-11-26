@@ -1,7 +1,8 @@
 import React, { useCallback } from "react";
 import AuthForm from "./forms/Auth/AuthForm";
-import { UserType, User } from "./forms/Auth/util";
+import { UserType, UserSignInType } from "./forms/Auth/util";
 import { useUser } from "../../store/entities/user/hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   label: string;
@@ -9,16 +10,28 @@ interface Props {
 }
 
 const AuthFormLayout: React.FC<Props> = ({ label, signup }) => {
+  const navigate = useNavigate();
   const { createUser } = useUser();
   const { setUser } = useUser();
-  const handleAddUser = useCallback((user: UserType) => {
-    createUser({ user: user });
-  }, []);
+  const handleAddUser = useCallback(
+    (user: UserType) => {
+      createUser({ user: user });
+    },
+    [createUser]
+  );
 
-  const handleSetUser = useCallback((user: User) => {
-    console.log(user);
-    setUser({ user: user });
-  }, []);
+  const handleSetUser = useCallback(
+    async (user: UserSignInType) => {
+      try {
+        await setUser(user);
+
+        navigate("/contact");
+      } catch (error) {
+        console.error("Error setting user:", error);
+      }
+    },
+    [navigate, setUser]
+  );
 
   return (
     <div className="min-h-screen flex items-center justify-center">
