@@ -10,7 +10,6 @@ export const initialState = (): Contact => ({
   contact_number: 0,
   contact_email: "",
   userId: "",
-  isActive: null,
 });
 
 export const { state: contactState, listState: contactsState } = createState({

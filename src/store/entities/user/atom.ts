@@ -1,7 +1,7 @@
 import { CurrentUser } from "./type";
 import { createState } from "../../util/createState";
 
-const key = (str: string) => `src/store/entities/contact/${str}`;
+const key = (str: string) => `src/store/entities/user/${str}`;
 
 export const initialState = (): CurrentUser => ({
   id: "",

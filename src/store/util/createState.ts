@@ -1,4 +1,4 @@
-import { DefaultValue, atom, atomFamily, selectorFamily } from "recoil";
+import { atom, atomFamily, DefaultValue, selectorFamily } from "recoil";
 
 type Props<T> = {
   key: (str: string) => string;
@@ -7,10 +7,8 @@ type Props<T> = {
 };
 
 type State = {
-  userId: string;
   id: string;
 };
-
 export const createState = <T extends State>(props: Props<T>) => {
   const atomState = atomFamily<T, string>({
     key: props.key("atomState"),

@@ -26,7 +26,7 @@ export const useUser = () => {
           localStorage.setItem("token", usertoken);
 
           try {
-            const user: CurrentUser | null = decodeToken(usertoken);
+            const user = getCurrentUser();
             if (user) {
               upsert(user);
             }
@@ -42,6 +42,21 @@ export const useUser = () => {
     },
     [upsert, signInUserRefetch]
   );
+
+  const getCurrentUser = () => {
+    const storedToken = localStorage.getItem("token");
+
+    if (storedToken) {
+      try {
+        const user: CurrentUser | null = decodeToken(storedToken);
+        return user;
+      } catch (decodeError) {
+        throw new Error(`Error decoding token: ${decodeError}`);
+      }
+    }
+
+    return null;
+  };
 
   const createUser = useRecoilCallback(
     () => async (input: { user: SignUpMutationVariables }) => {
@@ -60,6 +75,7 @@ export const useUser = () => {
 
   return {
     setUser,
+    getCurrentUser,
     createUser,
   };
 };

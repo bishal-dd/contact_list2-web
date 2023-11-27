@@ -1,12 +1,9 @@
-import { createState } from "../../util/createState";
+// atoms/modalState.ts
+import { atom } from "recoil";
 
-const key = (str: string) => `src/store/entities/modal/${str}`;
-
-export const initialState = () => ({
-  isCreateModalOpen: false,
-});
-
-export const { state: modalState } = createState({
-  key,
-  initialState,
+export const modalState = atom({
+  key: "modalState", // Update the key to avoid conflicts
+  default: {
+    isCreateModalOpen: false,
+  },
 });

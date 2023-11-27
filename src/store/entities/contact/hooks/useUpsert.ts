@@ -1,12 +1,14 @@
 import { useRecoilCallback } from "recoil";
 import { contactState } from "../atom";
-import { Contact } from "../type";
+import { CreateContactMutationVariables } from "../type";
 
 export const useUpsert = () => {
   const upsert = useRecoilCallback(
     ({ set }) =>
-      (input: Contact) => {
-        set(contactState(input.id), input);
+      (input: CreateContactMutationVariables) => {
+        if (input != null && input.id != null) {
+          set(contactState(input.id), input);
+        }
       },
     []
   );

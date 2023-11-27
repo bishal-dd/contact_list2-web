@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import React from "react";
 import Table from "../components/molecules/table/Table";
 import CRUDButtons from "../components/atoms/buttons/CRUD-buttons/CRUDButtons";
 import Navbar from "../components/organisms/header/Navbar";
 import CreateModal from "../components/organisms/modals/CreateModal";
 import { modalState } from "../store/entities/modal/atom";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const ContactList: React.FC = () => {
-  const [modalsState, setModalState] = useRecoilState(modalState);
-
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const isCreateModalOpen = useRecoilValue(modalState);
+  const setModalState = useSetRecoilState(modalState);
 
   const openCreateModal = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsCreateModalOpen(true);
+    // Update the Recoil state to open the modal
+    setModalState((prevState) => ({
+      ...prevState,
+      isCreateModalOpen: !prevState.isCreateModalOpen, // Toggle the value
+    }));
   };
 
-  const closeCreateModal = () => {
-    setIsCreateModalOpen(false);
-  };
   return (
     <>
       <Navbar
@@ -44,7 +44,7 @@ const ContactList: React.FC = () => {
         </div>
       </div>
 
-      {isCreateModalOpen && <CreateModal onClose={closeCreateModal} />}
+      {isCreateModalOpen.isCreateModalOpen && <CreateModal />}
     </>
   );
 };

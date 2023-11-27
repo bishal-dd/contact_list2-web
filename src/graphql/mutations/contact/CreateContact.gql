@@ -2,7 +2,7 @@ mutation CreateContact(
   $contact_name: String!
   $contact_email: String!
   $contact_number: Int!
-  $userId: Int!
+  $userId: ID!
 ) {
   createContact(
     contact_name: $contact_name
