@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CRUDButtons from "../../atoms/buttons/CRUD-buttons/CRUDButtons";
+import { useContact } from "../../../store/entities/contact/hooks/useContact";
+import { useUser } from "../../../store/entities/user/hooks/useUser";
+import { useRecoilValue } from "recoil";
+import { contactState } from "../../../store/entities/contact/atom";
 
 interface Props {
   background: string;
@@ -7,6 +11,22 @@ interface Props {
 }
 
 const Table: React.FC<Props> = ({ background, text_color }) => {
+  const { getCurrentUser } = useUser();
+
+  const currentUserID = getCurrentUser()?.id;
+  const { setContact } = useContact(currentUserID || "");
+  const data = useRecoilValue(contactState(currentUserID || ""));
+
+  // Fetch and update contacts when the component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      await setContact();
+      console.log(data);
+    };
+
+    fetchData();
+  }, [setContact, currentUserID]);
+
   return (
     <div className="container mx-auto py-5">
       <div className="overflow-x-auto shadow-lg">

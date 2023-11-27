@@ -10,6 +10,7 @@ export const initialState = (): Contact => ({
   contact_number: 0,
   contact_email: "",
   userId: "",
+  __typename: "Contact",
 });
 
 export const { state: contactState, listState: contactsState } = createState({
@@ -23,6 +24,6 @@ export const ContactByUserIdState = selectorFamily<Contact[], string>({
     (userId) =>
     ({ get }) => {
       const contact = get(contactsState);
-      return contact.filter((contact) => contact.userId === userId);
+      return contact.filter((contact) => contact.id === userId);
     },
 });

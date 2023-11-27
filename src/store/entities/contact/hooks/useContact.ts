@@ -1,31 +1,34 @@
 import { useRecoilCallback } from "recoil";
 import { useUpsert } from "./useUpsert";
-import { contactState } from "../atom";
+import { useGetAllContactQuery } from "../../../../graphql/types";
 import { Contact } from "../type";
-import { useUpdateContactMutation } from "../../../../graphql/types";
 
-export const useContact = (contactId: string) => {
+export const useContact = (userId: string) => {
   const { upsert } = useUpsert();
 
-  const [updateContactMutation] = useUpdateContactMutation();
+  const { refetch: getAllContactsRefetch } = useGetAllContactQuery({
+    variables: {
+      userId: userId, // Provide the actual userId value
+    },
+  });
 
   const setContact = useRecoilCallback(
-    ({ snapshot }) =>
-      async (input: Partial<Contact>) => {
-        const prev = await snapshot.getPromise(contactState(contactId));
-        upsert({ ...prev, ...input });
+    () => async () => {
+      const { data, errors } = await getAllContactsRefetch();
+      const res = data?.getAllContact;
 
-        const res = await updateContactMutation({
-          variables: {
-            id: contactId,
-            ...input,
-          },
-        });
-        if (res.errors) {
-          upsert(prev);
+      if (errors) {
+        throw new Error(`${errors}`);
+      } else {
+        if (Array.isArray(res)) {
+          // Iterate through the array and upsert each contact
+          res.forEach((contact) => upsert({ ...contact }));
+        } else {
+          console.error("Unexpected data format:", data);
         }
-      },
-    [upsert, updateContactMutation, contactId]
+      }
+    },
+    [upsert, getAllContactsRefetch, userId]
   );
 
   return {

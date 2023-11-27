@@ -1,7 +1,5 @@
 import { useRecoilCallback } from "recoil";
 import { useUpsert } from "./useUpsert";
-import { contactState } from "../atom";
-import { Contact } from "../type";
 import {
   CreateContactMutationVariables,
   useCreateContactMutation,

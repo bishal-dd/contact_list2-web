@@ -1,4 +1,4 @@
-query GetAllContact($userId: Int!) {
+query GetAllContact($userId: ID!) {
   getAllContact(userId: $userId) {
     ...ContactFragment
   }
