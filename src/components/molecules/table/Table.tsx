@@ -21,11 +21,11 @@ const Table: React.FC<Props> = ({ background, text_color }) => {
   useEffect(() => {
     const fetchData = async () => {
       await setContact();
-      console.log(data);
     };
 
     fetchData();
-  }, [setContact, currentUserID]);
+    console.log(data);
+  }, []);
 
   return (
     <div className="container mx-auto py-5">

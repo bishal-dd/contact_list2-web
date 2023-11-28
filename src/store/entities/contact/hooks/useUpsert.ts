@@ -7,16 +7,7 @@ export const useUpsert = () => {
     ({ set }) =>
       (input: Contact) => {
         if (input != null && input.id != null) {
-          console.log(input);
           set(contactState(input.id), input);
-          // Use set directly on the contactsState atom
-          set(contactsState, (prevContacts) => {
-            // Assuming input.id is unique identifier for contacts
-            const updatedContacts = prevContacts.map((contact) =>
-              contact.id === input.id ? input : contact
-            );
-            return updatedContacts;
-          });
         }
       },
     []
