@@ -1,7 +1,6 @@
 import { useRecoilCallback } from "recoil";
 import { useUpsert } from "./useUpsert";
 import { useGetAllContactQuery } from "../../../../graphql/types";
-import { Contact } from "../type";
 
 export const useContact = (userId: string) => {
   const { upsert } = useUpsert();

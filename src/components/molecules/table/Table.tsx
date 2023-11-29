@@ -17,15 +17,22 @@ const Table: React.FC<Props> = ({ background, text_color }) => {
   const { setContact } = useContact(currentUserID || "");
   const data = useRecoilValue(contactState(currentUserID || ""));
 
-  // Fetch and update contacts when the component mounts
   useEffect(() => {
     const fetchData = async () => {
-      await setContact();
+      try {
+        console.log("Fetching data...");
+        await setContact();
+        console.log("Data fetched successfully!");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
 
     fetchData();
-    console.log(data);
-  }, []);
+  }, [setContact]);
+
+  // Log the current data
+  console.log("Current Data:", data);
 
   return (
     <div className="container mx-auto py-5">

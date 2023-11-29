@@ -1,7 +1,6 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import AuthForm from "../Auth/AuthForm";
 import { vi } from "vitest";
-import { gql } from "@apollo/client";
 import userEvent from "@testing-library/user-event";
 import { MockedProvider } from "@apollo/client/testing";
 

@@ -1,4 +1,5 @@
 import { atom, atomFamily, DefaultValue, selectorFamily } from "recoil";
+import { uniqBy } from "../../utils/uniqBy";
 
 type Props<T> = {
   key: (str: string) => string;
@@ -45,6 +46,11 @@ export const createState = <T extends State>(props: Props<T>) => {
         }
 
         set(atomState(id), newVal);
+        set(listState, (prev) =>
+          uniqBy([...prev, newVal], "id").map((p) =>
+            p.id === newVal.id ? { ...p, ...newVal } : p
+          )
+        );
 
         if (get(idsState).find((projectId) => projectId === newVal.id)) return;
         set(idsState, (prev) => [...prev, newVal.id]);
