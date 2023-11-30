@@ -29,7 +29,7 @@ const CreateModal: React.FC = () => {
         console.error("Error setting contact:", error);
       }
     },
-    [createContact]
+    [createContact, currentUserID]
   );
 
   return (

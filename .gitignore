@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# scripts
+scripts/graphql/*.js
+scripts/util/*.js
+
+## storybook
+src/stories
+build-storybook.log

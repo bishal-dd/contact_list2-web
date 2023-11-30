@@ -3,7 +3,10 @@ import CRUDButtons from "../../atoms/buttons/CRUD-buttons/CRUDButtons";
 import { useContact } from "../../../store/entities/contact/hooks/useContact";
 import { useUser } from "../../../store/entities/user/hooks/useUser";
 import { useRecoilValue } from "recoil";
-import { contactState } from "../../../store/entities/contact/atom";
+import {
+  ContactByUserIdState,
+  contactState,
+} from "../../../store/entities/contact/atom";
 
 interface Props {
   background: string;
@@ -15,7 +18,7 @@ const Table: React.FC<Props> = ({ background, text_color }) => {
 
   const currentUserID = getCurrentUser()?.id;
   const { setContact } = useContact(currentUserID || "");
-  const data = useRecoilValue(contactState(currentUserID || ""));
+  const contacts = useRecoilValue(ContactByUserIdState(currentUserID || ""));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +35,7 @@ const Table: React.FC<Props> = ({ background, text_color }) => {
   }, [setContact]);
 
   // Log the current data
-  console.log("Current Data:", data);
+  console.log("Current Data:", contacts);
 
   return (
     <div className="container mx-auto py-5">
