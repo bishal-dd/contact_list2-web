@@ -10,6 +10,7 @@ const argv = yargs(hideBin(process.argv)).argv as unknown as { file: string };
 const createMock = async () => {
   if (argv.file) {
     const file = path.resolve(".", argv.file as string);
+    console.log(file);
     spawnSync(`npx hygen new mock --file ${file}`);
     consola.success("Succeed!");
     return;

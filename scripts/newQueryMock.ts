@@ -1,6 +1,6 @@
 import { hideBin } from "yargs/helpers";
 import yargs from "yargs/yargs";
-import { spawnSync } from "./util/spawnSync.ts";
+import { spawnSync } from "./util/spawnSync";
 
 const argv = yargs(hideBin(process.argv)).argv as unknown as { file: string };
 

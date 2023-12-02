@@ -4,7 +4,6 @@
     "module": "CommonJS",
     "sourceMap": false,
     "resolveJsonModule": true,
-    "allowImportingTsExtensions": true,
     "noEmit": true
   },
 
