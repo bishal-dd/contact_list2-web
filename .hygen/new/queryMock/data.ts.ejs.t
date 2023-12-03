@@ -11,7 +11,7 @@ export const data = (options?: Response, deepMergeOptions?: deepmerge.Options): 
     {},
     (options || {}) as Query,
     {
-      arrayMerge(target: any[], source: any[]): any[] {
+      arrayMerge(target: unknown[], source: unknown[]): unknown[] {
         if (!source.length) return source;
 
         return [...target, ...source];

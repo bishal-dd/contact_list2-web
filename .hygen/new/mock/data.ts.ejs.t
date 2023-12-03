@@ -10,7 +10,7 @@ export const <%= queryTypeName %> = (options?: Options, deepMergeOptions?: deepm
     <%- data %>,
     (options || {}) as Query,
     {
-      arrayMerge(target: any[], source: any[]): any[] {
+      arrayMerge(target: unknown[], source: unknown[]): unknown[] {
         if (!source.length) return source;
 
         return [...target, ...source];

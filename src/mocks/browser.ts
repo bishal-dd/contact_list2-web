@@ -1,9 +1,9 @@
-import { setupServer } from "msw/node";
+import { setupWorker } from "msw";
 import { handlers as mutationHandlers } from "./mutations/handlers";
 import { handlers as queryHandlers } from "./queries/handlers";
 
-export const server = setupServer(...[...queryHandlers, ...mutationHandlers]);
+export const worker = setupWorker(...[...queryHandlers, ...mutationHandlers]);
 
 export const removeAllListeners = () => {
-  server.events.removeAllListeners();
+  worker.events.removeAllListeners();
 };

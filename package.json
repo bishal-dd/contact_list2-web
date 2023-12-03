@@ -14,7 +14,8 @@
     "generate": "graphql-codegen",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "new:queryMock": "tsx ./scripts/newQueryMock.ts"
+    "new:queryMock": "tsx ./scripts/newQueryMock.ts",
+    "new:mutationMock": "ts-node ./scripts/newMutationMock.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
